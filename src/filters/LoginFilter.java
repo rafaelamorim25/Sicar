@@ -28,7 +28,11 @@ public class LoginFilter implements Filter {
 		
 		if(login != null && Boolean.parseBoolean(login)) {
 			System.out.println("logado");
-			chain.doFilter(request, response);
+			try{
+				chain.doFilter(request, response);
+			}catch(Exception e) {
+				((HttpServletResponse) response).sendRedirect("clienteSearch");
+			}
 		}else {
 			System.out.println("não logado");
 			((HttpServletResponse) response).sendRedirect("login");

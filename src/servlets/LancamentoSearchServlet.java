@@ -29,7 +29,6 @@ public class LancamentoSearchServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Cliente cliente = clienteService.findBy(Integer.parseInt(request.getParameter("id")));
 
-		if (cliente != null) {
 			request.getSession().setAttribute("id_cliente", Integer.parseInt(request.getParameter("id")));
 			List<String> fields = new ArrayList<String>();
 			fields.add(cliente.getNome());
@@ -54,8 +53,5 @@ public class LancamentoSearchServlet extends HttpServlet {
 			String HTML = FileToString.convert(RelativePath.fileName(this, "lancamentos.html"), fields);
 			out.println(HTML);
 
-		} else {
-			out.println("Cliente não encontrado");
-		}
 	}
 }

@@ -1,0 +1,4 @@
+implementar barra de search cliente
+redirecionamentos
+implementar o deletar corretamente no cliente não funciona
+implementar o deletar e no lançamento tá feio

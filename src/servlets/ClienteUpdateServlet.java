@@ -27,25 +27,25 @@ public class ClienteUpdateServlet extends HttpServlet {
 
 	private void sendUpdateForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		ClienteService clienteService = new ClienteService();
-		Cliente cliente = clienteService.findBy(Integer.parseInt(request.getParameter("id")));
+			ClienteService clienteService = new ClienteService();
+			Cliente cliente = clienteService.findBy(Integer.parseInt(request.getParameter("id")));
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
 
-		List<String> fields = new ArrayList<String>();
+			List<String> fields = new ArrayList<String>();
 
-		fields.add(request.getRequestURI() + "?id=" + cliente.getId());
-		fields.add(cliente.getNome());
-		fields.add(cliente.getCpf().toString());
-		fields.add(cliente.getEmail());
+			fields.add(request.getRequestURI() + "?id=" + cliente.getId());
+			fields.add(cliente.getNome());
+			fields.add(cliente.getCpf().toString());
+			fields.add(cliente.getEmail());
 
-		String fileSeparator = System.getProperty("file.separator");
+			String fileSeparator = System.getProperty("file.separator");
 
-		String HTML = FileToString.convert(
-				this.getServletContext().getRealPath(fileSeparator) + fileSeparator + "clienteForm.html", fields);
+			String HTML = FileToString.convert(
+					this.getServletContext().getRealPath(fileSeparator) + fileSeparator + "clienteForm.html", fields);
 
-		out.println(HTML);
+			out.println(HTML);
 	}
 
 	void updateRecord(HttpServletRequest request, HttpServletResponse response) throws IOException {
