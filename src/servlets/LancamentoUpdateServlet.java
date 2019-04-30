@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,12 +27,9 @@ public class LancamentoUpdateServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		try {
+		
 			updateRecord(request, response);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	private void sendUpdateForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -59,8 +55,8 @@ public class LancamentoUpdateServlet extends HttpServlet {
 		out.println(HTML);
 	}
 
-	void updateRecord(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-
+	void updateRecord(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
 		LancamentosService lancamentosService = new LancamentosService();
 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -71,8 +67,12 @@ public class LancamentoUpdateServlet extends HttpServlet {
 
 		Lancamento lancamento = new Lancamento(Integer.parseInt(request.getParameter("id")), date,
 				Float.parseFloat(request.getParameter("valor")), tp);
+		
+			lancamentosService.upadte(lancamento);
+			response.sendRedirect("Mensagem?acao=update&domain=Lancamento&classe=success");
+		} catch (Exception e) {
+			response.sendRedirect("Mensagem?acao=update&domain=Lancamento&classe=danger");
+		}
 
-		lancamentosService.upadte(lancamento);
-		response.sendRedirect("lancamentoSearch?id=" + request.getSession().getAttribute("id_cliente"));
 	}
 }

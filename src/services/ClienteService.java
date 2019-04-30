@@ -35,8 +35,8 @@ public class ClienteService {
 				return "nenhum registro foi apagado";
 			}
 		}
-		
-		return "Não é possivel deletar cliente que está em divida";
+		throw new RuntimeException("Não é possivel deletar cliente que está em divida");
+		//return "Não é possivel deletar cliente que está em divida";
 	}
 	
 	public Cliente findBy(int id) {

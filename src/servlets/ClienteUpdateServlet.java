@@ -49,12 +49,17 @@ public class ClienteUpdateServlet extends HttpServlet {
 	}
 
 	void updateRecord(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		ClienteService clienteService = new ClienteService();
-		Cliente cliente = new Cliente(Integer.parseInt(request.getParameter("id")), request.getParameter("nome"),
-				Long.parseLong(request.getParameter("cpf")), request.getParameter("email"));
-		clienteService.update(cliente);
-		response.sendRedirect("clienteSearch");
+		try {
+			ClienteService clienteService = new ClienteService();
+			Cliente cliente = new Cliente(Integer.parseInt(request.getParameter("id")), request.getParameter("nome"),
+					Long.parseLong(request.getParameter("cpf")), request.getParameter("email"));
+			clienteService.update(cliente);
+			response.sendRedirect("Mensagem?acao=update&domain=Cliente&classe=success");
+		}catch(Exception e) {
+			response.sendRedirect("Mensagem?acao=update&domain=Cliente&classe=danger");
+		}
+		
+		
 
 	}
 }

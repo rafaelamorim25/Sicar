@@ -132,4 +132,19 @@
     <servlet-name>systemError</servlet-name>
     <url-pattern>/systemError</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Mensagem</display-name>
+    <servlet-name>Mensagem</servlet-name>
+    <servlet-class>servlets.Mensagem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Mensagem</servlet-name>
+    <url-pattern>/Mensagem</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/Error404.html</location>
+  </error-page>
+  
 </web-app>

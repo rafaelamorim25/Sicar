@@ -65,12 +65,16 @@ public class LancamentoDeleteServlet extends HttpServlet {
 		}
 	}
 	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			LancamentosService lancamentosService = new LancamentosService();
+			
+			lancamentosService.delete(Integer.parseInt(req.getParameter("id")));
+			
+			resp.sendRedirect("Mensagem?acao=delete&domain=Lancamento&classe=success");
+		}catch (Exception e) {
+			resp.sendRedirect("Mensagem?acao=delete&domain=Lancamento&classe=danger");
+		}
 		
-		LancamentosService lancamentosService = new LancamentosService();
-	
-		lancamentosService.delete(Integer.parseInt(req.getParameter("id")));
-		
-		resp.sendRedirect("clienteSearch");
 	}
 }

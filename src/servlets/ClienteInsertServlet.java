@@ -52,7 +52,7 @@ public class ClienteInsertServlet extends HttpServlet {
 			request.getSession().setAttribute("cliente", cliente);
 			response.sendRedirect("lancamentoInsert");
 		} catch (Exception e) {
-			response.sendRedirect("insertCliente");
+			response.sendRedirect("Mensagem?acao=insert&domain=Cliente&classe=danger");
 		}
 	}
 }

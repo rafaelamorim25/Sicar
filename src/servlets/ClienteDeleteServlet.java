@@ -47,13 +47,16 @@ public class ClienteDeleteServlet extends HttpServlet {
 		}
 	}
 	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			ClienteService clienteService = new ClienteService();
+			
+			clienteService.delete(Integer.parseInt(req.getParameter("id")));
+			resp.sendRedirect("Mensagem?acao=delete&domain=Cliente&classe=success");	
+		}catch (Exception e ) {
+			resp.sendRedirect("Mensagem?acao=delete&domain=Cliente&classe=danger");	
+		}
 		
-		ClienteService clienteService = new ClienteService();
-	
-		clienteService.delete(Integer.parseInt(req.getParameter("id")));
-		
-		resp.sendRedirect("clienteSearch");
 	}
 
 }

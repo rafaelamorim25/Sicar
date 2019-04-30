@@ -81,8 +81,12 @@ public class LancamentoInsertServlet extends HttpServlet {
 			lancamentosService.insert(lancamento);
 			response.sendRedirect("lancamentoSearch?id=" + request.getSession().getAttribute("id_cliente"));
 		} catch (Exception e) {
+			cliente = clienteService.findBy(cliente.getCpf());
+			if (cliente != null) {
+				clienteService.delete(cliente.getId());
+			}
 			request.getSession().setAttribute("cliente", null);
-			response.sendRedirect("insertCliente");
+			response.sendRedirect("Mensagem?acao=insert&domain=Cliente&classe=danger");
 		}
 	}
 
@@ -104,9 +108,9 @@ public class LancamentoInsertServlet extends HttpServlet {
 			Lancamento lancamento = new Lancamento(date, Float.parseFloat(request.getParameter("valor")),
 					TipoLancamento.toEnum(Integer.parseInt(request.getParameter("tipo"))), cliente);
 			lancamentosService.insert(lancamento);
-			response.sendRedirect("lancamentoSearch?id=" + request.getSession().getAttribute("id_cliente"));
+			response.sendRedirect("Mensagem?acao=insert&domain=Lancamento&classe=success");
 		} catch (Exception e) {
-			response.sendRedirect("lancamentoSearch?id=" + request.getSession().getAttribute("id_cliente"));
+			response.sendRedirect("Mensagem?acao=insert&domain=Lancamento&classe=danger");
 		}
 	}
 }
