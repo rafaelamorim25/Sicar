@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loggedIn", new String("false"));
-			request.getSession().setAttribute("erro", "Senha incorreta");
+			request.getSession().setAttribute("erro", "Usuário ou senha incorretos, tente novamente");
 			sendLoginForm(request, response);
 		}
 	}
@@ -49,11 +49,8 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String HTML;
 
-		if (request.getSession().getAttribute("erro") != null) {
-			HTML = FileToString.convert(RelativePath.fileName(this, "login.html"), "Senha incorreta");
-		} else {
-			HTML = FileToString.convert(RelativePath.fileName(this, "login.html"), "");
-		}
+		HTML = FileToString.convert(RelativePath.fileName(this, "login.html"),
+				request.getSession().getAttribute("erro").toString());
 
 		out.println(HTML);
 

@@ -47,14 +47,14 @@ public class Mensagem extends HttpServlet {
 			if(classe.equals("success")) {
 				msg = msg + " inserido com sucesso";
 			}else {
-				msg = msg + " n√£o inserido. Ocorreu erro";
+				msg = msg + " n„o inserido. Ocorreu erro";
 			}
 			break;
 		case "update":
 			if(classe.equals("success")) {
 				msg = msg + " atualizado com sucesso";
 			}else {
-				msg = msg + " n√£o atualizado. Ocorreu erro";
+				msg = msg + " n„o atualizado. Ocorreu erro";
 			}
 			break;
 		case "delete":
@@ -62,9 +62,9 @@ public class Mensagem extends HttpServlet {
 				msg = msg + " deletado com sucesso";
 			}else {
 				if (domain.equals("Cliente")) {
-					msg = "N√£o √© poss√≠vel deletar cliente com divida";
+					msg = "N„o foi possivel deletar, cliente com divida";
 				}else {
-					msg = msg + " n√£o deletado. Ocorreu erro";
+					msg = msg + " n„o deletado. Ocorreu erro";
 				}
 			}
 			break;

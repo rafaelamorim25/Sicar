@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginFilter implements Filter {
-	
+
 	@SuppressWarnings("unused")
 	private FilterConfig filterConfig = null;
 
@@ -24,22 +24,18 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		String login = (String) ((HttpServletRequest)request).getSession().getAttribute("loggedIn");
-		
-		if(login != null && Boolean.parseBoolean(login)) {
+		String login = (String) ((HttpServletRequest) request).getSession().getAttribute("loggedIn");
+
+		if (login != null && Boolean.parseBoolean(login)) {
 			System.out.println("logado");
-			try{
+			try {
 				chain.doFilter(request, response);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				try {
-					((HttpServletResponse) response).sendRedirect("clienteSearch");
-				}catch(Exception ee) {
-					((HttpServletResponse) response).sendRedirect("systemError");
-				}
 				
+				((HttpServletResponse) response).sendRedirect("clienteSearch");
 			}
-		}else {
+		} else {
 			System.out.println("não logado");
 			((HttpServletResponse) response).sendRedirect("login");
 		}
