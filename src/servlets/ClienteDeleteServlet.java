@@ -35,6 +35,8 @@ public class ClienteDeleteServlet extends HttpServlet {
 			fields.add(cliente.getCpf().toString());
 			fields.add(cliente.getEmail());
 			fields.add(cliente.saldo().toString());
+			fields.add(request.getRequestURI());
+			fields.add(request.getParameter("id"));
 			
 			String HTML = FileToString.convert(RelativePath.fileName(this, "clienteDelete.html"), fields);
 
@@ -48,10 +50,7 @@ public class ClienteDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		ClienteService clienteService = new ClienteService();
-		
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
-		
+	
 		clienteService.delete(Integer.parseInt(req.getParameter("id")));
 		
 		resp.sendRedirect("clienteSearch");

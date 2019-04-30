@@ -31,7 +31,13 @@ public class LoginFilter implements Filter {
 			try{
 				chain.doFilter(request, response);
 			}catch(Exception e) {
-				((HttpServletResponse) response).sendRedirect("clienteSearch");
+				e.printStackTrace();
+				try {
+					((HttpServletResponse) response).sendRedirect("clienteSearch");
+				}catch(Exception ee) {
+					((HttpServletResponse) response).sendRedirect("systemError");
+				}
+				
 			}
 		}else {
 			System.out.println("não logado");

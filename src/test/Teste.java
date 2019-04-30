@@ -1,13 +1,18 @@
 package test;
 
+import java.util.List;
+
+import domain.Cliente;
+import repositories.ClienteRepository;
+
 public class Teste {
 	
 	public static void main(String[] args) {
 		
-		if ("qwerASDFzxcv".indexOf ("iii") >= 0) {
-		    System.out.println ("ASDF foi encontrada em qwerASDFzxcv");
-		}else {
-			System.out.println("não achou");
-		}
+	ClienteRepository c = new ClienteRepository();
+	
+	List<Cliente> cl = c.customSearch("70423441115");
+	
+	System.out.println(cl.toString());
 	}
 }

@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		sendLoginForm(response, false);
+		sendLoginForm(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,24 +30,30 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		if (loginService.login(new Usuario(userName, password))) {
-			// send HttpSession Object to the browser
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loggedIn", new String("true"));
 			response.sendRedirect("clienteSearch");
+			request.getSession().setAttribute("erro", "");
 		} else {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loggedIn", new String("false"));
-			sendLoginForm(response, true);
+			request.getSession().setAttribute("erro", "Senha incorreta");
+			sendLoginForm(request, response);
 		}
 	}
 
-	private void sendLoginForm(HttpServletResponse response, boolean withErrorMessage)
+	private void sendLoginForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		String HTML;
 
-		String HTML = FileToString.convert(RelativePath.fileName(this, "login.html"));
+		if (request.getSession().getAttribute("erro") != null) {
+			HTML = FileToString.convert(RelativePath.fileName(this, "login.html"), "Senha incorreta");
+		} else {
+			HTML = FileToString.convert(RelativePath.fileName(this, "login.html"), "");
+		}
 
 		out.println(HTML);
 

@@ -17,6 +17,10 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
+	public List<Cliente> customSearch(String keyword){
+		return clienteRepository.customSearch(keyword);
+	}
+	
 	public String delete(int id) {
 		
 		Cliente cliente = clienteRepository.findBy(id);

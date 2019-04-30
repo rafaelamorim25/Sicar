@@ -1,4 +1,5 @@
-implementar barra de search cliente
 redirecionamentos
-implementar o deletar corretamente no cliente não funciona
-implementar o deletar e no lançamento tá feio
+implementar algo pra mostrar mensagem ao concluir ações
+trocar os html de lugar
+arrumar a gambiarra to fileToString
+fazer uma dml massa do trem

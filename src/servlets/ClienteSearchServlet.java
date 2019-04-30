@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,15 +19,22 @@ public class ClienteSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		sendSearchResult(response);
+		sendSearchResult(request, response, "");
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String keyword = request.getParameter("palavraChave");
+		sendSearchResult(request, response, keyword);
 	}
 
-	void sendSearchResult(HttpServletResponse response) throws IOException {
+	void sendSearchResult(HttpServletRequest request, HttpServletResponse response, String keyword) throws IOException {
 		ClienteService clienteService = new ClienteService();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		List<String> fields = new ArrayList<String>();
+		fields.add(request.getRequestURI());
 
-		List<Cliente> clientes = clienteService.findAll();
+		List<Cliente> clientes = clienteService.customSearch(keyword);
 		StringBuilder str = new StringBuilder();
 
 		for (Cliente cliente : clientes) {
@@ -44,8 +52,10 @@ public class ClienteSearchServlet extends HttpServlet {
 					+ "><i class=\"fas fa-trash-alt\"></i></a></TD>\n");
 			str.append("</TR>\n");
 		}
+		
+		fields.add(str.toString());
 
-		String HTML = FileToString.convert(RelativePath.fileName(this, "clientes.html"), str.toString());
+		String HTML = FileToString.convert(RelativePath.fileName(this, "clientes.html"), fields);
 
 		out.println(HTML);
 	}

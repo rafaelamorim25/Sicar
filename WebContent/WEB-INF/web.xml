@@ -122,4 +122,14 @@
     <servlet-name>logout</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>systemError</display-name>
+    <servlet-name>systemError</servlet-name>
+    <servlet-class>servlets.SystemError</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>systemError</servlet-name>
+    <url-pattern>/systemError</url-pattern>
+  </servlet-mapping>
 </web-app>
