@@ -16,10 +16,6 @@ import utils.RelativePath;
 public class Mensagem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Mensagem() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		sendMensagemDeAlerta(request,response);
 	}
@@ -29,8 +25,7 @@ public class Mensagem extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		List<String> fields = new ArrayList<String>();
 		
-		/*fields.add("text-"+request.getParameter("classe"));
-		fields.add("");*/
+		fields.add(request.getParameter("classe"));
 		fields.add(renderMessage(request.getParameter("domain"),request.getParameter("acao"),request.getParameter("classe")));
 		
 		

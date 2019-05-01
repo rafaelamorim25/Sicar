@@ -48,6 +48,10 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String HTML;
+		
+		if(request.getSession().getAttribute("erro")==null) {
+			request.getSession().setAttribute("erro", "");
+		}
 
 		HTML = FileToString.convert(RelativePath.fileName(this, "login.html"),
 				request.getSession().getAttribute("erro").toString());

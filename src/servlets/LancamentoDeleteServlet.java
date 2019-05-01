@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,13 @@ public class LancamentoDeleteServlet extends HttpServlet {
 		
 		Lancamento lancamento = lancamentosService.findBy(Integer.parseInt(request.getParameter("id")));
 		
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		
 		if(lancamento != null) {
 			
 			List<String> fields = new ArrayList<String>();
 			
-			fields.add(lancamento.getData().toString());
+			fields.add(format.format(lancamento.getData()));
 			fields.add(lancamento.getTipoLancamento().toString());
 			fields.add(lancamento.getValor().toString());
 			fields.add(request.getRequestURI());

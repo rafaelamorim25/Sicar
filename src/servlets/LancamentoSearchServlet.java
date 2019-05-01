@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +37,12 @@ public class LancamentoSearchServlet extends HttpServlet {
 			fields.add(cliente.getEmail());
 
 			StringBuilder str = new StringBuilder();
+			
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 			for (Lancamento lancamento : cliente.getLancamentos()) {
 				str.append("<TR>\n");
-				str.append("<TD>" + lancamento.getData() + "</TD>\n");
+				str.append("<TD>" + format.format(lancamento.getData()) + "</TD>\n");
 				str.append("<TD>" + lancamento.getValor() + "</TD>\n");
 				str.append("<TD>" + lancamento.getTipoLancamento() + "</TD>\n");
 				str.append("<TD><A HREF=lancamentoUpdate?id=" + lancamento.getIdLancamento() + "><i class=\"fas fa-edit\"></i></A></TD>\n");
