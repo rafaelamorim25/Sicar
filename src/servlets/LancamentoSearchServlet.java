@@ -43,7 +43,7 @@ public class LancamentoSearchServlet extends HttpServlet {
 			for (Lancamento lancamento : cliente.getLancamentos()) {
 				str.append("<TR>\n");
 				str.append("<TD>" + format.format(lancamento.getData()) + "</TD>\n");
-				str.append("<TD>" + lancamento.getValor() + "</TD>\n");
+				str.append("<TD>R$" + lancamento.getValor() + "</TD>\n");
 				str.append("<TD>" + lancamento.getTipoLancamento() + "</TD>\n");
 				str.append("<TD><A HREF=lancamentoUpdate?id=" + lancamento.getIdLancamento() + "><i class=\"fas fa-edit\"></i></A></TD>\n");
 				str.append("<TD><A class=\"text-danger\" HREF=lancamentoDelete?id=" + lancamento.getIdLancamento() + "><i class=\"fas fa-trash-alt\"></i></A></TD>\n");

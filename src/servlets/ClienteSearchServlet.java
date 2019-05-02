@@ -44,7 +44,7 @@ public class ClienteSearchServlet extends HttpServlet {
 			str.append("<TD>" + cliente.getNome() + "</TD>\n");
 			str.append("<TD>" + Cpf.format(cliente.getCpf()) + "</TD>\n");
 			str.append("<TD>" + cliente.getEmail() + "</TD>\n");
-			str.append("<TD>" + cliente.saldo() + "</TD>\n");
+			str.append("<TD>R$" + cliente.saldo() + "</TD>\n");
 			str.append("<TD class=\"text-center\"><a class=\"text-secondary text-center\" HREF=lancamentoSearch?id="
 					+ cliente.getId() + "><i class=\"fas fa-list-ul\"></i></a></TD>\n");
 			str.append("<TD class=\"text-center\"><a text-center HREF=clienteUpdate?id=" + cliente.getId()

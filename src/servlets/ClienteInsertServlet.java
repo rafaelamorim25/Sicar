@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Cliente;
+import utils.Cpf;
 import utils.FileToString;
 import utils.RelativePath;
 
@@ -47,6 +48,11 @@ public class ClienteInsertServlet extends HttpServlet {
 	void insertRecord(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		try {
+			
+			if(!Cpf.isValid(Long.parseLong(request.getParameter("cpf")))) {
+				throw new Exception("Cpf invalido.");
+			}
+			
 			Cliente cliente = new Cliente(request.getParameter("nome"), Long.parseLong(request.getParameter("cpf")),
 					request.getParameter("email"));
 			request.getSession().setAttribute("cliente", cliente);
