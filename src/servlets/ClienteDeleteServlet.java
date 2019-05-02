@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Cliente;
 import services.ClienteService;
+import utils.Cpf;
 import utils.FileToString;
 import utils.RelativePath;
 
@@ -32,7 +33,7 @@ public class ClienteDeleteServlet extends HttpServlet {
 			List<String> fields = new ArrayList<String>();
 			
 			fields.add(cliente.getNome());
-			fields.add(cliente.getCpf().toString());
+			fields.add(Cpf.format(cliente.getCpf()));
 			fields.add(cliente.getEmail());
 			fields.add(cliente.saldo().toString());
 			fields.add(request.getRequestURI());

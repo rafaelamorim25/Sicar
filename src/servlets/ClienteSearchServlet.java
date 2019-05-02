@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Cliente;
 import services.ClienteService;
+import utils.Cpf;
 import utils.FileToString;
 import utils.RelativePath;
 
@@ -41,7 +42,7 @@ public class ClienteSearchServlet extends HttpServlet {
 
 			str.append("<TR>\n");
 			str.append("<TD>" + cliente.getNome() + "</TD>\n");
-			str.append("<TD>" + cliente.getCpf() + "</TD>\n");
+			str.append("<TD>" + Cpf.format(cliente.getCpf()) + "</TD>\n");
 			str.append("<TD>" + cliente.getEmail() + "</TD>\n");
 			str.append("<TD>" + cliente.saldo() + "</TD>\n");
 			str.append("<TD class=\"text-center\"><a class=\"text-secondary text-center\" HREF=lancamentoSearch?id="
