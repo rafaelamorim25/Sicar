@@ -1,9 +1,7 @@
 package services;
 
 import java.util.Date;
-import java.util.List;
 
-import domain.Cliente;
 import repositories.ClienteRepository;
 import repositories.RelatoriosRepository;
 
@@ -13,14 +11,7 @@ public class RelatoriosService {
 	ClienteRepository clienteRepository = new ClienteRepository();
 	
 	public Float amountToReceive() {
-		List<Cliente> clientes = clienteRepository.findAll();
-		float total = 0.0F;
-		
-		for(Cliente cliente : clientes) {
-			total += cliente.saldo();
-		}
-		
-		return total * (-1);
+		return relatoriosRepository.amountToReceive();
 	}
 	
 	public Float amountReceivedBetween(Date a, Date b) {
@@ -28,10 +19,18 @@ public class RelatoriosService {
 	}
 	
 	public Float amountToReceiveBetween(Date a, Date b) {
-		return relatoriosRepository.amountToReceiveBetween(a, b) * (-1);
+		return relatoriosRepository.amountToReceiveBetween(a, b);
 	}
 	
 	public Float amountReceived() {
 		return relatoriosRepository.amountReceived();
+	}
+	
+	public Float amountPendency() {
+		return this.amountToReceive() - this.amountReceived();
+	}
+	
+	public Float amountPendency(Date a, Date b) {
+		return this.amountToReceiveBetween(a, b) - amountReceivedBetween(a, b);
 	}
 }

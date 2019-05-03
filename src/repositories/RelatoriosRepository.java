@@ -69,4 +69,24 @@ public class RelatoriosRepository {
 		
 		return total;
 	}
+	
+	public float amountToReceive() {
+		String sql = "SELECT sum(valor_lancamento) FROM lancamento WHERE tipo_lancamento = 1";
+		PreparedStatement preparedStatement = ConnectionManager.getConnectionManager().getPrepareStatement(sql);
+		Float total = 0.0F;
+		
+		try {
+			
+			ResultSet resultSet =  preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				total = resultSet.getFloat(1);
+			}
+		
+		}catch (Exception e){
+			System.out.println("Erro ao gerar relatório");
+		}
+		
+		return total;
+	}
 }
