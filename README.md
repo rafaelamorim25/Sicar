@@ -1,1 +1,1 @@
-. Arquivo da larissa
+Antes do conflito
