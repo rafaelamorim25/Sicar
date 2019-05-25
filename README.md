@@ -1,1 +1,1 @@
-Antes do conflito
+Antes do conflito ..
